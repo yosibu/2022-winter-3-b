@@ -28,6 +28,10 @@ serve((req) => {
                 return todo.apiAdd(req);
             case "/api/todo/delete":
                 return todo.apiDelete(req);
+            case "/api/setList":
+                return setList(req)
+            case "/api/getToDoList":
+                return getList(req)
         }
     }
 
@@ -43,6 +47,24 @@ serve((req) => {
         enableCors: true
     });
 });
+
+let list: string [] = [];
+
+const setList = (req: Request) => { //送られたデータをそのまま返す
+    const params = parseSearchParams(new URL(req.url))
+    const name = params.x.toString()
+    const i = list.length
+    list[i] = name
+    return createJsonResponse({list})
+}
+
+const getList = (req: Request) => {
+    return createJsonResponse({list})
+}
+
+
+
+
 
 // 従来の function を使った関数宣言
 // 現在の日時を返す API
