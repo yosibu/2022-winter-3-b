@@ -3,6 +3,7 @@ import { serveDir } from "https://deno.land/std@0.127.0/http/file_server.ts";
 import { format } from "https://deno.land/std@0.127.0/datetime/mod.ts";
 import { Todo } from "./todo.ts";
 
+//テストこうせい
 // ToDo の API は Todo クラスにまとめてある
 const todo = new Todo();
 
