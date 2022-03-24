@@ -34,35 +34,6 @@ serve( async(req) => {
                 return setList(req)
             case "/api/getToDoList":
                 return getList(req)
-            // case "/api/subscribe":
-            //     try {
-            //         const subscription = JSON.stringify(req);
-            //         const uuid = UUID.generate();
-            //         await Deno.writeTextFile("data/subscription/" + uuid + ".json", subscription);
-            //         console.log(uuid);
-            //         return { uuid };
-            //     } catch (e) {
-            //         console.log(e);
-            //     }
-            // case "/api/unsubscribe":
-            //     try {
-            //         console.log(req);
-            //         const uuid = req.uuid;
-            //         console.log(uuid);
-            //         await Deno.remove("data/subscription/" + uuid + ".json");
-            //         return { uuid };
-            //     } catch (e) {
-            //         console.log(e);
-            //     }
-            // case "/api/push":
-            //     try {
-            //         const uuid = req.uuid;
-            //         const data = req.data;
-            //         return push(uuid, data);
-            //         return { uuid };
-            //     } catch (e) {
-            //         console.log(e);
-            //     }
         }
     }
 
