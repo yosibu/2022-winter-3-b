@@ -50,18 +50,28 @@ serve( async(req) => {
     });
 });
 
-let list: string [] = [];
+let list: check  [] = []
+
+interface check {
+    inside: string,
+    done:boolean,
+}
+
+
 
 const setList = (req: Request) => { //送られたデータをそのまま返す
     const params = parseSearchParams(new URL(req.url))
     const name = params.x.toString()
-    const i = list.length
-    list[i] = name
+    list.push({inside: name,done: false})
     return createJsonResponse({list})
 }
 
 const getList = (req: Request) => {
     return createJsonResponse({list})
+}
+
+const setCheck = (req: Request) => {
+
 }
 
 

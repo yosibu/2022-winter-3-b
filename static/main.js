@@ -40,7 +40,7 @@ async function addlistData(){//リストにデータを表示
   newText = document.createTextNode("やることの内容")
   newCell.appendChild(newText)
   for(let i = 0;i < list.length;i++){
-    addTable(list[i])
+    addTable(list[i].inside,list[i].done)
   }
 }
 
