@@ -2,12 +2,14 @@ import { serve } from "https://deno.land/std@0.127.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.127.0/http/file_server.ts";
 import { format } from "https://deno.land/std@0.127.0/datetime/mod.ts";
 import { Todo } from "./todo.ts";
+// import { UUID } from "https://code4sabae.github.io/js/UUID.js";
+// import { push } from "./push_cmd.js";
 
 // ToDo の API は Todo クラスにまとめてある
 const todo = new Todo();
 
 console.log("Listening on http://localhost:8000");
-serve((req) => {
+serve( async(req) => {
     const url = new URL(req.url);
     const pathname = url.pathname;
 
@@ -32,6 +34,35 @@ serve((req) => {
                 return setList(req)
             case "/api/getToDoList":
                 return getList(req)
+            // case "/api/subscribe":
+            //     try {
+            //         const subscription = JSON.stringify(req);
+            //         const uuid = UUID.generate();
+            //         await Deno.writeTextFile("data/subscription/" + uuid + ".json", subscription);
+            //         console.log(uuid);
+            //         return { uuid };
+            //     } catch (e) {
+            //         console.log(e);
+            //     }
+            // case "/api/unsubscribe":
+            //     try {
+            //         console.log(req);
+            //         const uuid = req.uuid;
+            //         console.log(uuid);
+            //         await Deno.remove("data/subscription/" + uuid + ".json");
+            //         return { uuid };
+            //     } catch (e) {
+            //         console.log(e);
+            //     }
+            // case "/api/push":
+            //     try {
+            //         const uuid = req.uuid;
+            //         const data = req.data;
+            //         return push(uuid, data);
+            //         return { uuid };
+            //     } catch (e) {
+            //         console.log(e);
+            //     }
         }
     }
 
