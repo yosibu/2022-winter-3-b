@@ -2,12 +2,14 @@ import { serve } from "https://deno.land/std@0.127.0/http/server.ts";
 import { serveDir } from "https://deno.land/std@0.127.0/http/file_server.ts";
 import { format } from "https://deno.land/std@0.127.0/datetime/mod.ts";
 import { Todo } from "./todo.ts";
+// import { UUID } from "https://code4sabae.github.io/js/UUID.js";
+// import { push } from "./push_cmd.js";
 
 // ToDo の API は Todo クラスにまとめてある
 const todo = new Todo();
 
 console.log("Listening on http://localhost:8000");
-serve((req) => {
+serve( async(req) => {
     const url = new URL(req.url);
     const pathname = url.pathname;
 
@@ -28,6 +30,10 @@ serve((req) => {
                 return todo.apiAdd(req);
             case "/api/todo/delete":
                 return todo.apiDelete(req);
+            case "/api/setList":
+                return setList(req)
+            case "/api/getToDoList":
+                return getList(req)
         }
     }
 
@@ -43,6 +49,24 @@ serve((req) => {
         enableCors: true
     });
 });
+
+let list: string [] = [];
+
+const setList = (req: Request) => { //送られたデータをそのまま返す
+    const params = parseSearchParams(new URL(req.url))
+    const name = params.x.toString()
+    const i = list.length
+    list[i] = name
+    return createJsonResponse({list})
+}
+
+const getList = (req: Request) => {
+    return createJsonResponse({list})
+}
+
+
+
+
 
 // 従来の function を使った関数宣言
 // 現在の日時を返す API

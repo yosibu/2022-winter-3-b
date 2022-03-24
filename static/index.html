@@ -4,16 +4,40 @@
     <meta charset="utf-8" />
     <link rel="stylesheet" href="styles.css" />
   </head>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+
   <body>
-    <div>家にいたときにやることリスト</div>
+    <div>リスト追加</div>
+    やることの内容:<input type="text"  id="name">
+    <button id="set_list">リストに追加</button>
+
+    <div>家にいたときのやることリスト</div>
     <table border = "1" id="stay_home_list">
-      <thead>
-          <tr>
-              <td>チェックボックス</td>
-              <td>実施内容</td>
-          </tr>
-      </thead>
-  </table>
+        <thead>
+            <tr>
+                <td>やったかチェック</td>
+                <td>やることの内容</td>
+            </tr>
+        </thead>
+    </table>
+
     <script type="module" src="main.js"></script>
+
+    <button type="button" onclick="sendPushNotification()">通知テスト</button>
+    <script type="text/javascript">
+        function sendPushNotification() {
+            Push.create('テスト', {
+                body: 'テスト',
+                icon: 'index.jpg',
+                timeout: 5000,
+                onClick: function () {
+                    this.close();
+                    location.href = 'https://hogehoge.jp';
+                }
+            });
+        }
+    </script>
+
   </body>
 </html>
