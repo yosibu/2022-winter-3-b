@@ -2,18 +2,20 @@ let intervalID
 
 set_list.onclick = async () => {
   const name = document.getElementById("name").value
-  console.log(name)
   const response = await fetch("/api/setList?x=" + name,{
     method: "GET"
   })
 }
 
-function addTable(name){
+function addTable(name,done){
   let table = document.getElementById("stay_home_list")
   let newRow = table.insertRow()
 
   let newCell = newRow.insertCell()
-  let newText = document.createTextNode("ここにチェック")
+  let newText
+  const ch = Object.assign(document.createElement('input'),{type:"checkbox",name:"ch",value:"1"})
+  if(done == true)newText = document.createTextNode(ch)
+  else newText = document.createTextNode(ch)
   newCell.appendChild(newText)
 
   newCell = newRow.insertCell()
@@ -27,6 +29,7 @@ async function addlistData(){//リストにデータを表示
   })
   const json = await response.json()
   const list = json.list
+  console.log(list)
   let table = document.getElementById("stay_home_list")
   table.deleteTHead()
   let thead = table.createTHead();
@@ -40,7 +43,7 @@ async function addlistData(){//リストにデータを表示
   newText = document.createTextNode("やることの内容")
   newCell.appendChild(newText)
   for(let i = 0;i < list.length;i++){
-    addTable(list[i])
+    addTable(list[i].inside,list[i].done)
   }
 }
 
